@@ -6,8 +6,12 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy => policy
         //.AllowAnyOrigin()
-        .WithOrigins("http://localhost:3000/", "http://localhost:1/")
+        .WithOrigins(
+            "http://localhost:3000/", 
+            "http://localhost:1/",
+            "https://lively-sky-028740303.5.azurestaticapps.net")
         .AllowAnyHeader()
+        //.WithHeaders()
         .AllowAnyMethod()
     );
 });
