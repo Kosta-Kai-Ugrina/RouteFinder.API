@@ -1,4 +1,3 @@
-using RouteFinder.API.Model;
 using RouteFinder.API.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -57,8 +56,9 @@ app.Use(async (HttpContext context, Func<Task> next) =>
 });
 
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Hello World 2!");
 app.MapPost("/fastest-route", routeSvc.FindFastestRoute);
 app.MapGet("/google-api-key", routeSvc.GetGoogleApiKey);
+app.MapGet("/test1", routeSvc.TryRoute);
 
 app.Run();

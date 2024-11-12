@@ -1,12 +1,23 @@
 ﻿using RouteFinder.API.Model;
+using RouteFinder.API.Utils;
+using RouteFinder.API.Utils.Serialization;
+using GoogleRoute = GoogleApi.Entities.Maps.Directions.Response.Route;
 
 namespace RouteFinder.API.Service
 {
     public class RoutesService
     {
+        public async Task<string> TryRoute()
+        {
+            var routeData = RouteExamples.Example01();
+            var responseContent = await client.RequestRouteDirections(routeData);
+            return responseContent;
+        }
+
         public RoutesService(WebApplicationBuilder builder)
         {
             this.googleApiKey = builder.Configuration["GoogleApiKey"];
+            this.client = new RouteHttpClient(RouteHttpClient.CreateHttpClientTemplate(googleApiKey));
         }
 
         public string? GetGoogleApiKey(string password)
@@ -25,5 +36,6 @@ namespace RouteFinder.API.Service
         }
 
         private readonly string googleApiKey;
+        private readonly RouteHttpClient client;
     }
 }
