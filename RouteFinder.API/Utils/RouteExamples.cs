@@ -20,7 +20,7 @@ namespace RouteFinder.API.Utils
                     }
                 }
             };
-            routeRequest.Origin = new RouteWayPoint
+            routeRequest.Destination = new RouteWayPoint
             {
                 Location = new RouteLocation
                 {

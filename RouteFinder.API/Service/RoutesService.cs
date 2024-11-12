@@ -1,7 +1,5 @@
 ﻿using RouteFinder.API.Model;
 using RouteFinder.API.Utils;
-using RouteFinder.API.Utils.Serialization;
-using GoogleRoute = GoogleApi.Entities.Maps.Directions.Response.Route;
 
 namespace RouteFinder.API.Service
 {
@@ -9,7 +7,6 @@ namespace RouteFinder.API.Service
     {
         public async Task<string> TryRoute()
         {
-
             var routeData = RouteExamples.Example01();
             var responseContent = await client.RequestRouteDirections(routeData);
             return responseContent;
