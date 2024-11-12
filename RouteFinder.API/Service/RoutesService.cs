@@ -15,7 +15,7 @@ namespace RouteFinder.API.Service
             return googleApiKey;
         }
 
-        public async Task<List<Address>> FindFastestRoute(
+        public async Task<List<AddressRequest>> FindFastestRoute(
             RouteRequest routeRequest)
         {
             var addressStart = routeRequest.AddressStart;

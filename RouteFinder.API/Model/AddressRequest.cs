@@ -2,7 +2,7 @@
 
 namespace RouteFinder.API.Model
 {
-    public class Address
+    public class AddressRequest
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }
