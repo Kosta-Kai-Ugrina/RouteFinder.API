@@ -10,7 +10,9 @@ namespace RouteFinder.API.Utils.Serialization
                 value: obj,
                 settings: new JsonSerializerSettings
                 {
-                    Converters = [new GoogleApiEnumUppercaseStringConverter()],
+                    Converters = [
+                        new GoogleApiEnumUppercaseStringConverter(),
+                        new GoogleApiJsonPropertyNamesConverter()],
                     ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 });
     }
