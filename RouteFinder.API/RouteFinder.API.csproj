@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="GoogleApi" Version="5.5.5" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>
