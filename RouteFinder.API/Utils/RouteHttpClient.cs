@@ -19,8 +19,9 @@ namespace RouteFinder.API.Utils
 
         public async Task<string> RequestRouteDirections(RoutesDirectionsRequest data)
         {
+            var dataJson = GoogleApiJsonConverter.Serialize(data);
             var content = new StringContent(
-                content: GoogleApiJsonConverter.Serialize(data),
+                content: dataJson,
                 encoding: Encoding.UTF8,
                 mediaType: "application/json");
 
@@ -29,10 +30,10 @@ namespace RouteFinder.API.Utils
 
             if (!response.IsSuccessStatusCode)
             {
-                return $"FAILED\n{responseContent}";
+                return $"FAILED\n\n\nREQUEST BODY:\n{dataJson}\n\nRESPONSE:\n{responseContent}";
             }
-
-            return responseContent;
+            
+            return $"SUCCESS\n\n\nREQUEST BODY:\n{dataJson}\n\nRESPONSE:\n{responseContent}";
         }
 
         public static HttpClient CreateHttpClientTemplate(string googleApiKey)
