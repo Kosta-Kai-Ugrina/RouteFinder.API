@@ -60,5 +60,7 @@ app.MapGet("/", () => "Hello World 2!");
 app.MapPost("/fastest-route", routeSvc.FindFastestRoute);
 app.MapGet("/google-api-key", routeSvc.GetGoogleApiKey);
 app.MapGet("/test1", routeSvc.TryRoute);
+app.MapGet("/test2", routeSvc.TestNearestNeighborOptimizationAlgorithm1);
+app.MapGet("/test3", routeSvc.TestNearestNeighborOptimizationAlgorithm2);
 
 app.Run();

@@ -1,21 +1,17 @@
-﻿using RouteFinder.API.Model;
+﻿using RouteFinder.API.Model.Extensions;
+using RouteFinder.API.Model.RequestData;
+using RouteFinder.API.Model.RouteOptimization;
 using RouteFinder.API.Utils;
 
 namespace RouteFinder.API.Service
 {
     public class RoutesService
     {
-        public async Task<string> TryRoute()
-        {
-            var routeData = RouteExamples.Example01();
-            var responseContent = await client.RequestRouteDirections(routeData);
-            return responseContent;
-        }
-
         public RoutesService(WebApplicationBuilder builder)
         {
             this.googleApiKey = builder.Configuration["GoogleApiKey"];
             this.client = new RouteHttpClient(RouteHttpClient.CreateHttpClientTemplate(googleApiKey));
+            this.optimizer = new RouteOptimizer();
         }
 
         public string? GetGoogleApiKey(string password)
@@ -33,6 +29,30 @@ namespace RouteFinder.API.Service
             return [addressStart, .. addressDestinationList];
         }
 
+        public async Task<string> TryRoute()
+        {
+            var routeData = RouteExamples.ExampleSimple();
+            var responseContent = await client.RequestRouteDirections(routeData);
+            return responseContent;
+        }
+
+        public string TestNearestNeighborOptimizationAlgorithm1()
+        {
+            var routeData = RouteExamples.ExampleWrongOrder1();
+            var optimizer = new RouteOptimizer(new NearestNeighborStrategy());
+            var optimizedRouteData = optimizer.OptimizeRoute(routeData.ToRouteRequest());
+            return optimizedRouteData.ToString();
+        }
+
+        public string TestNearestNeighborOptimizationAlgorithm2()
+        {
+            var routeData = RouteExamples.ExampleWrongOrder2();
+            var optimizer = new RouteOptimizer(new NearestNeighborStrategy());
+            var optimizedRouteData = optimizer.OptimizeRoute(routeData.ToRouteRequest());
+            return optimizedRouteData.ToString();
+        }
+
+        private readonly RouteOptimizer optimizer;
         private readonly string googleApiKey;
         private readonly RouteHttpClient client;
     }
