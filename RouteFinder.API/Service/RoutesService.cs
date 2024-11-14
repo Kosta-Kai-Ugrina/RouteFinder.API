@@ -10,14 +10,8 @@ namespace RouteFinder.API.Service
         public RoutesService(WebApplicationBuilder builder)
         {
             this.googleApiKey = builder.Configuration["GoogleApiKey"];
-            this.client = new RouteHttpClient(RouteHttpClient.CreateHttpClientTemplate(googleApiKey));
+            this.client = new RouteHttpClient(RouteHttpClient.CreateHttpClientTemplate(this.googleApiKey));
             this.optimizer = new RouteOptimizer();
-        }
-
-        public string? GetGoogleApiKey(string password)
-        {
-            if (password != "PrettyPlease") return null;
-            return googleApiKey;
         }
 
         public async Task<List<AddressRequest>> FindFastestRoute(
@@ -33,6 +27,7 @@ namespace RouteFinder.API.Service
         {
             var routeData = RouteExamples.ExampleSimple();
             var responseContent = await client.RequestRouteDirections(routeData);
+
             return responseContent;
         }
 
@@ -41,6 +36,7 @@ namespace RouteFinder.API.Service
             var routeData = RouteExamples.ExampleWrongOrder1();
             var optimizer = new RouteOptimizer(new NearestNeighborStrategy());
             var optimizedRouteData = optimizer.OptimizeRoute(routeData.ToRouteRequest());
+
             return optimizedRouteData.ToString();
         }
 
@@ -49,7 +45,15 @@ namespace RouteFinder.API.Service
             var routeData = RouteExamples.ExampleWrongOrder2();
             var optimizer = new RouteOptimizer(new NearestNeighborStrategy());
             var optimizedRouteData = optimizer.OptimizeRoute(routeData.ToRouteRequest());
+
             return optimizedRouteData.ToString();
+        }
+
+        public RouteRequest FindOptimalAddressOrder(RouteRequest routeRequest)
+        {
+            var optimizedRouteData = this.optimizer.OptimizeRoute(routeRequest);
+
+            return optimizedRouteData;
         }
 
         private readonly RouteOptimizer optimizer;
