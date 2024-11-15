@@ -8,7 +8,7 @@ namespace RouteFinder.API.Model.Extensions
         public static AddressRequest ToAddressRequest(this RouteWayPoint wayPoint)
             => new()
             {
-                Name = wayPoint.Address,
+                Name = wayPoint.Address ?? string.Empty,
                 Latitude = wayPoint.Location.LatLng.Latitude,
                 Longitude = wayPoint.Location.LatLng.Longitude,
             };

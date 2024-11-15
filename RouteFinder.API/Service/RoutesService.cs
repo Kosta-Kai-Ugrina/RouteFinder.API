@@ -9,7 +9,7 @@ namespace RouteFinder.API.Service
     {
         public RoutesService(WebApplicationBuilder builder)
         {
-            this.googleApiKey = builder.Configuration["GoogleApiKey"];
+            this.googleApiKey = builder.Configuration["GoogleApiKey"]!;
             this.client = RouteHttpClient.Create(this.googleApiKey);
             this.optimizer = new RouteOptimizer();
         }

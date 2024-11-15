@@ -21,7 +21,6 @@ namespace RouteFinder.API.Model.RequestData
         public RouteWayPoint ToRouteWayPoint()
             => new()
             {
-                Address = this.Name,
                 Location = new RouteLocation
                 {
                     LatLng = new LatLng
