@@ -10,17 +10,18 @@ namespace RouteFinder.API.Service
         public RoutesService(WebApplicationBuilder builder)
         {
             this.googleApiKey = builder.Configuration["GoogleApiKey"];
-            this.client = new RouteHttpClient(RouteHttpClient.CreateHttpClientTemplate(this.googleApiKey));
+            this.client = RouteHttpClient.Create(this.googleApiKey);
             this.optimizer = new RouteOptimizer();
         }
 
-        public async Task<List<AddressRequest>> FindFastestRoute(
+        public async Task<string> FindFastestRoute(
             RouteRequest routeRequest)
         {
-            var addressStart = routeRequest.AddressStart;
-            var addressDestinationList = routeRequest.AddressDestinationList;
+            var optimizedRoute = this.optimizer.OptimizeRoute(routeRequest);
+            var requestData = optimizedRoute.ToRoutesDirectionsRequest();
+            var routeDirectionsData = await this.client.RequestRouteDirections(requestData);
 
-            return [addressStart, .. addressDestinationList];
+            return routeDirectionsData;
         }
 
         public async Task<string> TryRoute()

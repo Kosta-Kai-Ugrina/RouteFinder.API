@@ -12,7 +12,16 @@ namespace RouteFinder.API.Utils
 {
     public class RouteHttpClient
     {
-        public RouteHttpClient(HttpClient client)
+        public static RouteHttpClient Create(string googleApiKey)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("X-Goog-Api-Key", googleApiKey);
+            client.DefaultRequestHeaders.Add("X-Goog-FieldMask", "routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline");
+            var routeClient = new RouteHttpClient(client);
+            return routeClient;
+        }
+
+        private RouteHttpClient(HttpClient client)
         {
             this.client = client;
         }
@@ -36,14 +45,7 @@ namespace RouteFinder.API.Utils
             return $"SUCCESS\n\n\nREQUEST BODY:\n{dataJson}\n\nRESPONSE:\n{responseContent}";
         }
 
-        public static HttpClient CreateHttpClientTemplate(string googleApiKey)
-        {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("X-Goog-Api-Key", googleApiKey);
-            client.DefaultRequestHeaders.Add("X-Goog-FieldMask", "routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline");
-            return client;
-        }
-
+        
         public static RoutesDirectionsRequest RequestTemplate
             => new RoutesDirectionsRequest
             {
