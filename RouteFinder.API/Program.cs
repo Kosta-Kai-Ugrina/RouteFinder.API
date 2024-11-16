@@ -1,8 +1,14 @@
 using RouteFinder.API.Service;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()));
+
 builder.Configuration.AddJsonFile("appsettings.json");
 var app = builder.Build();
+app.UseCors();
 var routeSvc = new RoutesService(builder);
 
 app.MapGet("/", () => "Hello World 2!");
