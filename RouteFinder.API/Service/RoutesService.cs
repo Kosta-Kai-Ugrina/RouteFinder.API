@@ -1,4 +1,5 @@
-﻿using RouteFinder.API.Model.Extensions;
+﻿using GoogleApi.Entities.Maps.Routes.Directions.Response;
+using RouteFinder.API.Model.Extensions;
 using RouteFinder.API.Model.RequestData;
 using RouteFinder.API.Model.RouteOptimization;
 using RouteFinder.API.Utils;
@@ -14,7 +15,7 @@ namespace RouteFinder.API.Service
             this.optimizer = new RouteOptimizer();
         }
 
-        public async Task<string> FindFastestRoute(
+        public async Task<RouteResponse?> FindFastestRoute(
             RouteRequest routeRequest)
         {
             var optimizedRoute = this.optimizer.OptimizeRoute(routeRequest);
@@ -24,7 +25,7 @@ namespace RouteFinder.API.Service
             return routeDirectionsData;
         }
 
-        public async Task<string> TryRoute()
+        public async Task<RouteResponse?> TryRoute()
         {
             var routeData = RouteExamples.ExampleSimple();
             var responseContent = await client.RequestRouteDirections(routeData);

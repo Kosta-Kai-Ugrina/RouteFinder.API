@@ -7,6 +7,8 @@ using RouteFinder.API.Utils.Serialization;
 using System.Runtime.CompilerServices;
 using System.Reflection.Metadata;
 using System.Text;
+using GoogleApi.Entities.Maps.Routes.Directions.Response;
+using RouteFinder.API.Model.RequestData;
 
 namespace RouteFinder.API.Utils
 {
@@ -26,7 +28,8 @@ namespace RouteFinder.API.Utils
             this.client = client;
         }
 
-        public async Task<string> RequestRouteDirections(RoutesDirectionsRequest data)
+        [Obsolete]
+        public async Task<string> RequestRouteDirectionsOld(RoutesDirectionsRequest data)
         {
             var dataJson = GoogleApiJsonConverter.Serialize(data);
             var content = new StringContent(
@@ -41,11 +44,31 @@ namespace RouteFinder.API.Utils
             {
                 return $"FAILED\n\n\nREQUEST BODY:\n{dataJson}\n\nRESPONSE:\n{responseContent}";
             }
-            
+
             return $"SUCCESS\n\n\nREQUEST BODY:\n{dataJson}\n\nRESPONSE:\n{responseContent}";
         }
 
-        
+        public async Task<RouteResponse?> RequestRouteDirections(RoutesDirectionsRequest data)
+        {
+            var dataJson = GoogleApiJsonConverter.Serialize(data);
+            var content = new StringContent(
+                content: dataJson,
+                encoding: Encoding.UTF8,
+                mediaType: "application/json");
+
+            var response = await this.client.PostAsync(this.uri, content);
+            var responseContentBla = await response.Content.ReadAsStringAsync();
+            var responseContent = await response.Content.ReadFromJsonAsync(typeof(RouteResponse));
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            return responseContent as RouteResponse;
+        }
+
+
         public static RoutesDirectionsRequest RequestTemplate
             => new RoutesDirectionsRequest
             {
