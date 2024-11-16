@@ -1,13 +1,12 @@
 ﻿using RouteFinder.API.Model.RequestData;
-
 using static System.Math;
 
-namespace RouteFinder.API.Model.RouteOptimization
+namespace RouteFinder.API.Utils
 {
     public static class DistanceCalculator
     {
         public static double CalculateManhattanDistance(
-            AddressRequest a, 
+            AddressRequest a,
             AddressRequest b)
         {
             var latADegrees = ConvertDegreesToRadians((double)a.Latitude!);
@@ -18,7 +17,7 @@ namespace RouteFinder.API.Model.RouteOptimization
             var latDiff = Abs(latBDegrees - latADegrees);
             var latDist = latDiff * APPROX_METERS_PER_DEGREE_LAT;
             var latAvg = (latADegrees + latBDegrees) / 2;
-            
+
             var metresPerDegreesLng = Cos(latAvg) * APPROX_METERS_PER_DEGREE_LAT;
             var lngDiff = Abs(lngBDegrees - lngADegrees);
             var lngDist = lngDiff * metresPerDegreesLng;
@@ -28,10 +27,10 @@ namespace RouteFinder.API.Model.RouteOptimization
             return manhattanDistance;
         }
 
-        private static double ConvertDegreesToRadians(double degrees) 
+        private static double ConvertDegreesToRadians(double degrees)
             => degrees * (PI / 180.0);
 
-        private const double APPROX_METERS_PER_DEGREE_LAT = 111000; 
+        private const double APPROX_METERS_PER_DEGREE_LAT = 111000;
 
     }
 }

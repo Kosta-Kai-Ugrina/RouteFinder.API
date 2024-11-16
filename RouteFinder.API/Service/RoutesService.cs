@@ -1,4 +1,5 @@
 ﻿using GoogleApi.Entities.Maps.Routes.Directions.Response;
+using RouteFinder.API.Model;
 using RouteFinder.API.Model.Extensions;
 using RouteFinder.API.Model.RequestData;
 using RouteFinder.API.Model.RouteOptimization;
@@ -12,7 +13,7 @@ namespace RouteFinder.API.Service
         {
             this.googleApiKey = builder.Configuration["GoogleApiKey"]!;
             this.client = RouteHttpClient.Create(this.googleApiKey);
-            this.optimizer = new RouteOptimizer();
+            this.optimizer = new RouteOptimizationService();
         }
 
         public async Task<RouteResponse?> FindFastestRoute(
@@ -25,6 +26,15 @@ namespace RouteFinder.API.Service
             return routeDirectionsData;
         }
 
+        public RouteRequest FindOptimalAddressOrder(RouteRequest routeRequest)
+        {
+            var optimizedRouteData = this.optimizer.OptimizeRoute(routeRequest);
+
+            return optimizedRouteData;
+        }
+
+        #region Test Methods
+
         public async Task<RouteResponse?> TryRoute()
         {
             var routeData = RouteExamples.ExampleSimple();
@@ -36,7 +46,7 @@ namespace RouteFinder.API.Service
         public string TestNearestNeighborOptimizationAlgorithm1()
         {
             var routeData = RouteExamples.ExampleWrongOrder1();
-            var optimizer = new RouteOptimizer(new NearestNeighborStrategy());
+            var optimizer = new RouteOptimizationService(new NearestNeighborStrategy());
             var optimizedRouteData = optimizer.OptimizeRoute(routeData.ToRouteRequest());
 
             return optimizedRouteData.ToString();
@@ -45,20 +55,15 @@ namespace RouteFinder.API.Service
         public string TestNearestNeighborOptimizationAlgorithm2()
         {
             var routeData = RouteExamples.ExampleWrongOrder2();
-            var optimizer = new RouteOptimizer(new NearestNeighborStrategy());
+            var optimizer = new RouteOptimizationService(new NearestNeighborStrategy());
             var optimizedRouteData = optimizer.OptimizeRoute(routeData.ToRouteRequest());
 
             return optimizedRouteData.ToString();
         }
 
-        public RouteRequest FindOptimalAddressOrder(RouteRequest routeRequest)
-        {
-            var optimizedRouteData = this.optimizer.OptimizeRoute(routeRequest);
+        #endregion
 
-            return optimizedRouteData;
-        }
-
-        private readonly RouteOptimizer optimizer;
+        private readonly RouteOptimizationService optimizer;
         private readonly string googleApiKey;
         private readonly RouteHttpClient client;
     }

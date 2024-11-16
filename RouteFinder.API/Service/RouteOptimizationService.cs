@@ -1,15 +1,16 @@
 ﻿using RouteFinder.API.Model.RequestData;
+using RouteFinder.API.Model.RouteOptimization;
 
-namespace RouteFinder.API.Model.RouteOptimization
+namespace RouteFinder.API.Service
 {
-    public class RouteOptimizer
+    public class RouteOptimizationService
     {
-        public RouteOptimizer() 
-        { 
+        public RouteOptimizationService()
+        {
             this.strategy = new NearestNeighborStrategy();
         }
 
-        public RouteOptimizer(IRouteOptimizationStrategy strategy)
+        public RouteOptimizationService(IRouteOptimizationStrategy strategy)
         {
             this.strategy = strategy;
         }

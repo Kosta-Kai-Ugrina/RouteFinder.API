@@ -10,7 +10,7 @@ using System.Text;
 using GoogleApi.Entities.Maps.Routes.Directions.Response;
 using RouteFinder.API.Model.RequestData;
 
-namespace RouteFinder.API.Utils
+namespace RouteFinder.API.Model
 {
     public class RouteHttpClient
     {
@@ -37,7 +37,7 @@ namespace RouteFinder.API.Utils
                 encoding: Encoding.UTF8,
                 mediaType: "application/json");
 
-            var response = await this.client.PostAsync(this.uri, content);
+            var response = await client.PostAsync(uri, content);
             var responseContent = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
@@ -56,7 +56,7 @@ namespace RouteFinder.API.Utils
                 encoding: Encoding.UTF8,
                 mediaType: "application/json");
 
-            var response = await this.client.PostAsync(this.uri, content);
+            var response = await client.PostAsync(uri, content);
             var responseContentBla = await response.Content.ReadAsStringAsync();
             var responseContent = await response.Content.ReadFromJsonAsync(typeof(RouteResponse));
 
