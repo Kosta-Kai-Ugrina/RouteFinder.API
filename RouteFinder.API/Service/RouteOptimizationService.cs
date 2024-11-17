@@ -1,21 +1,19 @@
-﻿
-namespace RouteFinder.API.Service
+﻿namespace RouteFinder.API.Service;
+
+public class RouteOptimizationService
 {
-    public class RouteOptimizationService
+    public RouteOptimizationService()
     {
-        public RouteOptimizationService()
-        {
-            this.strategy = new NearestNeighborStrategy();
-        }
-
-        public RouteOptimizationService(IRouteOptimizationStrategy strategy)
-        {
-            this.strategy = strategy;
-        }
-
-        public RouteRequest OptimizeRoute(RouteRequest routeRequest)
-            => this.strategy.OptimizeRoute(routeRequest);
-
-        private IRouteOptimizationStrategy strategy;
+        this.strategy = new NearestNeighborStrategy();
     }
+
+    public RouteOptimizationService(IRouteOptimizationStrategy strategy)
+    {
+        this.strategy = strategy;
+    }
+
+    public RouteRequest OptimizeRoute(RouteRequest routeRequest)
+        => this.strategy.OptimizeRoute(routeRequest);
+
+    private IRouteOptimizationStrategy strategy;
 }

@@ -1,31 +1,29 @@
-﻿
-namespace RouteFinder.API.Model.RequestData
+﻿namespace RouteFinder.API.Model.RequestData;
+
+public class AddressRequest
 {
-    public class AddressRequest
-    {
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
 
-        [JsonPropertyName("latitude")]
-        public double? Latitude { get; set; }
+    [JsonPropertyName("latitude")]
+    public double? Latitude { get; set; }
 
-        [JsonPropertyName("longitude")]
-        public double? Longitude { get; set; }
+    [JsonPropertyName("longitude")]
+    public double? Longitude { get; set; }
 
-        public override string ToString()
-            => $"{Name}-{{{Latitude} | {Longitude}}}";
+    public override string ToString()
+        => $"{Name}-{{{Latitude} | {Longitude}}}";
 
-        public RouteWayPoint ToRouteWayPoint()
-            => new()
+    public RouteWayPoint ToRouteWayPoint()
+        => new()
+        {
+            Location = new RouteLocation
             {
-                Location = new RouteLocation
+                LatLng = new LatLng
                 {
-                    LatLng = new LatLng
-                    {
-                        Latitude = (double)this.Latitude,
-                        Longitude = (double)this.Longitude,
-                    }
+                    Latitude = (double)this.Latitude,
+                    Longitude = (double)this.Longitude,
                 }
-            };
-    }
+            }
+        };
 }

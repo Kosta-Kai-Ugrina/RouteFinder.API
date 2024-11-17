@@ -1,8 +1,6 @@
-﻿
-namespace RouteFinder.API.Model.RouteOptimizationStrategy
+﻿namespace RouteFinder.API.Model.RouteOptimizationStrategy;
+
+public interface IRouteOptimizationStrategy
 {
-    public interface IRouteOptimizationStrategy
-    {
-        public RouteRequest OptimizeRoute(RouteRequest routeRequest);
-    }
+    public RouteRequest OptimizeRoute(RouteRequest routeRequest);
 }

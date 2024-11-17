@@ -1,17 +1,15 @@
-﻿
-namespace RouteFinder.API.Extensions
+﻿namespace RouteFinder.API.Extensions;
+
+public static partial class Extensions
 {
-    public static partial class Extensions
-    {
-        public static RouteRequest ToRouteRequest(this RoutesDirectionsRequest routeData)
-            => new()
-            {
-                AddressStart = routeData.Origin.ToAddressRequest(),
-                AddressDestinationList = routeData
-                    .Intermediates
-                    .Select(waypoint => waypoint.ToAddressRequest())
-                    .Append(routeData.Destination.ToAddressRequest())
-                    .ToList(),
-            };
-    }
+    public static RouteRequest ToRouteRequest(this RoutesDirectionsRequest routeData)
+        => new()
+        {
+            AddressStart = routeData.Origin.ToAddressRequest(),
+            AddressDestinationList = routeData
+                .Intermediates
+                .Select(waypoint => waypoint.ToAddressRequest())
+                .Append(routeData.Destination.ToAddressRequest())
+                .ToList(),
+        };
 }
