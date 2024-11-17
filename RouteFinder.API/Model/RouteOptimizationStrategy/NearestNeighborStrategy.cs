@@ -1,7 +1,7 @@
 ﻿using RouteFinder.API.Model.RequestData;
 using static RouteFinder.API.Utils.DistanceCalculator;
 
-namespace RouteFinder.API.Model.RouteOptimization
+namespace RouteFinder.API.Model.RouteOptimizationStrategy
 {
     public class NearestNeighborStrategy : IRouteOptimizationStrategy
     {

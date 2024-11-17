@@ -1,5 +1,5 @@
 ﻿using RouteFinder.API.Model.RequestData;
-using RouteFinder.API.Model.RouteOptimization;
+using RouteFinder.API.Model.RouteOptimizationStrategy;
 
 namespace RouteFinder.API.Service
 {

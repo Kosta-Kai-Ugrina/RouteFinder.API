@@ -1,6 +1,6 @@
 ﻿using RouteFinder.API.Model.RequestData;
 
-namespace RouteFinder.API.Model.RouteOptimization
+namespace RouteFinder.API.Model.RouteOptimizationStrategy
 {
     public interface IRouteOptimizationStrategy
     {
