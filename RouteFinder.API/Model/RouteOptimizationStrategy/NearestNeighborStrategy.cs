@@ -1,5 +1,4 @@
-﻿using RouteFinder.API.Model.RequestData;
-using static RouteFinder.API.Utils.DistanceCalculator;
+﻿using static RouteFinder.API.Utils.DistanceCalculator;
 
 namespace RouteFinder.API.Model.RouteOptimizationStrategy
 {

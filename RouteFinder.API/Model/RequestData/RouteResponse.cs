@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace RouteFinder.API.Model.RequestData
 {
     public class RouteResponse

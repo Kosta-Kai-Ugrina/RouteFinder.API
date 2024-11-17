@@ -1,5 +1,4 @@
-﻿using RouteFinder.API.Model.RequestData;
-using static System.Math;
+﻿using static System.Math;
 
 namespace RouteFinder.API.Utils
 {

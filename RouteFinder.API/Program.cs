@@ -1,5 +1,3 @@
-using RouteFinder.API.Service;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy
     .AllowAnyOrigin()

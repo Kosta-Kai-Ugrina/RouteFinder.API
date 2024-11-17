@@ -1,15 +1,4 @@
-﻿using GoogleApi.Entities.Maps.Routes.Common.Enums;
-using GoogleApi.Entities.Maps.Routes.Common;
-using GoogleApi.Entities.Maps.Routes.Directions.Request;
-using GoogleApi.Entities.Maps.Common.Enums;
-using GoogleApi.Entities.Common.Enums;
-using RouteFinder.API.Utils.Serialization;
-using System.Runtime.CompilerServices;
-using System.Reflection.Metadata;
-using System.Text;
-using GoogleApi.Entities.Maps.Routes.Directions.Response;
-using RouteFinder.API.Model.RequestData;
-
+﻿
 namespace RouteFinder.API.Model
 {
     public class RouteHttpClient

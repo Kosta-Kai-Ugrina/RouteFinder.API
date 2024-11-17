@@ -1,8 +1,4 @@
-﻿using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Entities.Maps.Routes.Common;
-using GoogleApi.Entities.Maps.Routes.Directions.Request;
-using System.Text.Json.Serialization;
-
+﻿
 namespace RouteFinder.API.Model.RequestData
 {
     public class RouteRequest

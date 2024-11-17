@@ -1,8 +1,4 @@
-﻿//using Newtonsoft.Json;
-//using Newtonsoft.Json.Serialization;
-
-using System.Text.Json;
-
+﻿
 namespace RouteFinder.API.Utils.Serialization
 {
     public static class GoogleApiJsonConverter

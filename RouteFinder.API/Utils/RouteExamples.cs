@@ -1,8 +1,4 @@
-﻿using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Entities.Maps.Routes.Common;
-using GoogleApi.Entities.Maps.Routes.Directions.Request;
-using RouteFinder.API.Model;
-
+﻿
 namespace RouteFinder.API.Utils
 {
     public static class RouteExamples

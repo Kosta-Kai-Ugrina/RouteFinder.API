@@ -1,7 +1,4 @@
-﻿using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Entities.Maps.Routes.Common;
-using System.Text.Json.Serialization;
-
+﻿
 namespace RouteFinder.API.Model.RequestData
 {
     public class AddressRequest

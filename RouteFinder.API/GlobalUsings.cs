@@ -1,0 +1,17 @@
+﻿global using RouteFinder.API.Service;
+global using GoogleApi.Entities.Maps.Common;
+global using GoogleApi.Entities.Maps.Routes.Common;
+global using GoogleApi.Entities.Maps.Routes.Directions.Request;
+global using RouteFinder.API.Model;
+global using RouteFinder.API.Model.RequestData;
+global using System.Runtime.Serialization;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using RouteFinder.API.Extensions;
+global using RouteFinder.API.Model.RouteOptimizationStrategy;
+global using RouteFinder.API.Utils;
+global using GoogleApi.Entities.Maps.Routes.Common.Enums;
+global using GoogleApi.Entities.Maps.Common.Enums;
+global using GoogleApi.Entities.Common.Enums;
+global using RouteFinder.API.Utils.Serialization;
+global using System.Text;

@@ -1,6 +1,4 @@
-﻿using GoogleApi.Entities.Maps.Routes.Directions.Request;
-using RouteFinder.API.Model.RequestData;
-
+﻿
 namespace RouteFinder.API.Extensions
 {
     public static partial class Extensions
