@@ -28,26 +28,6 @@ namespace RouteFinder.API.Model
             this.client = client;
         }
 
-        [Obsolete]
-        public async Task<string> RequestRouteDirectionsOld(RoutesDirectionsRequest data)
-        {
-            var dataJson = GoogleApiJsonConverter.Serialize(data);
-            var content = new StringContent(
-                content: dataJson,
-                encoding: Encoding.UTF8,
-                mediaType: "application/json");
-
-            var response = await client.PostAsync(uri, content);
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return $"FAILED\n\n\nREQUEST BODY:\n{dataJson}\n\nRESPONSE:\n{responseContent}";
-            }
-
-            return $"SUCCESS\n\n\nREQUEST BODY:\n{dataJson}\n\nRESPONSE:\n{responseContent}";
-        }
-
         public async Task<RouteResponse?> RequestRouteDirections(RoutesDirectionsRequest data)
         {
             var dataJson = GoogleApiJsonConverter.Serialize(data);
