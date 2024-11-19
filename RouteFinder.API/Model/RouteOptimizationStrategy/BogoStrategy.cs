@@ -7,7 +7,7 @@ public class BogoStrategy : IRouteOptimizationStrategy
         var destinations = routeRequest.AddressDestinationList;
         List<AddressRequest> list = DoNothing(destinations);
         routeRequest.AddressDestinationList = list;
-        
+    
         return routeRequest;
     }
 

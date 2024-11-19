@@ -25,15 +25,18 @@ public class RouteHttpClient
             mediaType: "application/json");
 
         var response = await client.PostAsync(uri, content);
-        var responseContentBla = await response.Content.ReadAsStringAsync();
-        var responseContent = await response.Content.ReadFromJsonAsync(typeof(RouteResponse));
-
         if (!response.IsSuccessStatusCode)
         {
             return null;
         }
 
-        return responseContent as RouteResponse;
+        var responseContent = await response.Content
+            .ReadFromJsonAsync(typeof(RouteResponse)) as RouteResponse;
+        responseContent.OptimizedAddressDestinationList = data
+            .ToRouteRequest()
+            .AddressDestinationList;
+
+        return responseContent;
     }
 
 

@@ -4,6 +4,9 @@ public class RouteResponse
 {
     [JsonPropertyName("routes")]
     public List<Routes> Routes { get; set; }
+
+    [JsonPropertyName("optimizedAddressDestinationList")]
+    public List<AddressRequest> OptimizedAddressDestinationList { get; set; }
 }
 
 public class Routes
